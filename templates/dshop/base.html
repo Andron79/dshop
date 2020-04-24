@@ -5,14 +5,14 @@
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <title>base</title>
+  <title>{% block title %}Base{% endblock %}</title>
   <link rel="stylesheet" href="{% static 'bootstrap.min.css' %}">
   <link rel="stylesheet" href="{% static 'main.css' %}">
 </head>
 <body class="" data-gr-c-s-loaded="true">
 
 <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-  <a class="navbar-brand" href="./index.html">Магазин Dshop</a>
+  <a class="navbar-brand" href="{% url "dshop:index" %}">Магазин Dshop</a>
   <img src="{% static 'logo.svg' %}" alt="" width="42" height="42">
   <button class="navbar-toggler" type="button" data-toggle="collapse"
           data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault"
@@ -23,7 +23,7 @@
   <div class="collapse navbar-collapse" id="navbarsExampleDefault">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item">
-        <a class="nav-link" href="index.html">
+        <a class="nav-link" href="{% url "dshop:index" %}">
           Главная</a>
       </li>
 
@@ -34,7 +34,7 @@
           Гаджеты</a>
         <div class="dropdown-menu" aria-labelledby="dropdown01">
          {% for category in categories %}
-             <a class="dropdown-item" href="{{ category.slug }}">{{ category.name }}</a>
+             <a class="dropdown-item" href="{{ category.get_absolute_url }}">{{ category.name }}</a>
          {% endfor %}
 
         </div>
@@ -53,10 +53,27 @@
 {#        </ul>#}
 
 
-      <li class="nav-item active">
-        <a class="nav-link" href="./empty_section.html">
-          Аксесcуары</a>
-      </li>
+
+        {% for category in categories %}
+          {% if not category.parent %}
+              <li class="nav-item active">
+                <a class="nav-link" href="{{ category.get_absolute_url }}">
+                {{ category.name }}</a>
+              </li>
+          {% else %}
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="{% url "dshop:product_list" %}" id="dropdown01"
+                   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    {{ category.name }}</a>
+                <div class="dropdown-menu" aria-labelledby="dropdown01">
+             {% for category in categories %}
+                 <a class="dropdown-item" href="{{ category.get_absolute_url }}">{{ category.name }}</a>
+             {% endfor %}
+                </div>
+              </li>
+          {% endif %}
+        {% endfor %}
+
 
 
     </ul>
@@ -73,20 +90,10 @@
 </nav>
 
 
-<main role="main">
-
-  <div class="container">
-    <!-- Example row of columns -->
-
-
-    <div class="alert alert-dark" role="alert">
-      Тут пока ничего нет!
-    </div>
-
-
-  </div> <!-- /container -->
-
-</main>
+<div id="content">
+    {% block content %}
+    {% endblock %}
+</div>
 
 <hr>
 <footer class="container">
@@ -98,3 +105,4 @@
 <script src="{% static 'bootstrap.min.js' %}"></script>
 
 </body>
+</html>

@@ -9,9 +9,10 @@ def index(request):
 
 
 def product_list(request, category_slug=None):
-    template = 'dshop/base.html'
+    template = 'dshop/product/list.html'
     category = None
     categories = Category.objects.all()
+    print(categories)
     products = Product.objects.filter(available=True)
     if category_slug:
         category = get_object_or_404(Category, slug=category_slug)
@@ -22,11 +23,12 @@ def product_list(request, category_slug=None):
                    'products': products})
 
 
-def product_detail(request, id=1, slug=None):
-    template = 'dshop/phone.html'
+def product_detail(request, id, slug=None):
+    template = 'dshop/product/detail.html'
     product = get_object_or_404(Product,
                                 id=id,
                                 slug=slug,
                                 available=True)
+    print(product.slug)
     return render(request, template,
                   {'product': product})

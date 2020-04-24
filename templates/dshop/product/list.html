@@ -1,32 +1,41 @@
 {% extends "dshop/base.html" %}
 {% load static %}
 {% block title %}
-    {% if category %}{{ category.name }}{% else %}Products{% endif %}
+    {% if categories %}{{ product.name }}{% else %}Products{% endif %}
 {% endblock %}
 {% block content %}
-    <div id="sidebar">
-        <h3>Categories</h3>
-        <ul>
-            <li {% if not category %}class="selected"{% endif %}>
-                <a href="{% url "dshop:product_list" %}">All</a>
-            </li>
-            {% for c in categories %}
-                <li {% if category.slug == c.slug %}class="selected"{% endif %}>
-                    <a href="{{ c.get_absolute_url }}">{{ c.name }}</a>
-                </li>
+
+   <div class="container">
+        <!-- Example row of columns -->
+        <div class="jumbotron">
+          <div class="container">
+            <h4 class="display-4">Выбираете себе гаджет?</h4>
+               <p>Вот что мы можем предложить:</p>
+          </div>
+        </div>
+
+       <div class="container mb-5">
+    <!-- Example row of columns -->
+      <div class="row">
+{#            <h1>{% if category %}{{ category.name }}{% else %}Products{% endif %}</h1>#}
+            {% for product in products %}
+                <div class="col-md-4">
+                    <a href="{{ product.get_absolute_url }}">{{ product.name }}</a><br>
+                    <a href="{{ product.get_absolute_url }}">
+                        <img src="{% if product.image %}{{ product.image.url }}
+                                  {% else %}{% static "img/no_image.png" %}{% endif %}"width="250"></a>
+                    <p> Цена: {{ product.price }} руб.</p>
+                  <form>
+                     <input type="submit" class="btn btn-secondary" value="Добавить в корзину »">
+                  </form>
+                </div>
             {% endfor %}
-        </ul>
-    </div>
-    <div id="main" class="product-list">
-        <h1>{% if category %}{{ category.name }}{% else %}Products{% endif %}</h1>
-        {% for product in products %}
-            <div class="item">
-                <a href="{{ product.get_absolute_url }}">
-                    <img src="{% if product.image %}{{ product.image.url }}{% else %}{% static "img/no_image.png" %}{% endif %}">
-                </a>
-                <a href="{{ product.get_absolute_url }}">{{ product.name }}</a><br>
-                ${{ product.price }}
-            </div>
-        {% endfor %}
-    </div>
-{% endblock %}
+
+        </div>
+      </div>
+      <div class="alert alert-dark" role="alert">
+          Просто здесь написано!
+      </div>
+    </div> <!-- /container -->
+
+{% endblock content %}
