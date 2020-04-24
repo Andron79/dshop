@@ -9,7 +9,7 @@ def index(request):
 
 
 def product_list(request, category_slug=None):
-    template = 'dshop/smartphones.html'
+    template = 'dshop/base.html'
     category = None
     categories = Category.objects.all()
     products = Product.objects.filter(available=True)
