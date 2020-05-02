@@ -24,6 +24,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.index, name='index'),
     path('dshop/', include('dshop.urls', namespace='dshop')),
+    path('articles_list/', views.articles_list, name='articles_list'),
 ]
 
 if settings.DEBUG:

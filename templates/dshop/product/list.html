@@ -7,37 +7,32 @@
 
 {% block content %}
 
-   <div class="container">
+    <div class="container">
         <!-- Example row of columns -->
         <div class="jumbotron">
-          <div class="container">
-            <h4 class="display-4">{% if category %}{{ category.name }}{% else %}Products{% endif %}</h4>
-
-          </div>
+            <div class="container">
+                <h4 class="display-4">{% if category %}{{ category.name }}{% else %}Products{% endif %}</h4>
+            </div>
         </div>
-
-       <div class="container mb-5">
-    <!-- Example row of columns -->
-      <div class="row">
-
-            {% for product in products %}
-                <div class="col-md-4">
-                    <a href="{{ product.get_absolute_url }}">{{ product.name }}</a><br>
-                    <a href="{{ product.get_absolute_url }}">
-                        <img src="{% if product.image %}{{ product.image.url }}
-                                  {% else %}{% static "img/no_image.png" %}{% endif %}"width="250"></a>
-                    <p> Цена: {{ product.price }} руб.</p>
-                  <form>
-                     <input type="submit" class="btn btn-secondary" value="Добавить в корзину »">
-                  </form>
-                </div>
-            {% endfor %}
-
+        <div class="container mb-5">
+            <div class="row">
+                {% for product in products %}
+                    <div class="col-md-4">
+                        <a href="{{ product.get_absolute_url }}">{{ product.name }}</a><br>
+                        <a href="{{ product.get_absolute_url }}">
+                            <img src="{% if product.image %}{{ product.image.url }}
+                                  {% else %}{% static "img/no_image.png" %}{% endif %}" width="250"></a>
+                        <p> Цена: {{ product.price }} руб.</p>
+                        <form>
+                            <input type="submit" class="btn btn-secondary" value="Добавить в корзину »">
+                        </form>
+                    </div>
+                {% endfor %}
+            </div>
         </div>
-      </div>
-      <div class="alert alert-dark" role="alert">
-          Просто здесь так написано!
-      </div>
+        <div class="alert alert-dark" role="alert">
+            Просто здесь так написано!
+        </div>
     </div> <!-- /container -->
 
 {% endblock content %}

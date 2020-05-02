@@ -6,18 +6,18 @@
     {{ product.name }}
 {% endblock %}
 
-
 {% block content %}
     <div class="container mt-3">
         <!-- Example row of columns -->
         <div class="row">
             <div class="col-md-12">
-
                 <h1>{{ product.name }}</h1>
                 <img src="
+
+
                         {% if product.image %}{{ product.image.url }}{% else %}{% static "img/no_image.png" %}{% endif %}">
 
-                            <h2><a href="{{ product.category.get_absolute_url }}">{{ product.category }}</a></h2>
+                <h2><a href="{{ product.category.get_absolute_url }}">{{ product.category }}</a></h2>
                 <p> Цена: {{ product.price }} руб.</p>
                 {{ product.description|linebreaks }}
                 <form method="post" action="./cart/">
@@ -91,12 +91,10 @@
                             5
                         </label>
                     </div>
-
                     <button type="submit" class="btn btn-primary">Оставить</button>
                 </form>
             </div>
         </div>
-
     </div> <!-- /container -->
 
 {% endblock content %}

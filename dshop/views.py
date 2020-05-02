@@ -1,11 +1,18 @@
 from django.shortcuts import render, get_object_or_404
-from .models import Product, Category
+from .models import Product, Category, Article
+
+
+# from django.views.generic import ListView
 
 
 def index(request):
     template = 'dshop/index.html'
     categories = Category.objects.all()
-    return render(request, template, context={'categories': categories})
+    # articles = Article.objects.all().order_by('published_at')
+
+    return render(request, template,
+                  context={'categories': categories}
+                  )
 
 
 def product_list(request, slug):
@@ -29,3 +36,17 @@ def product_detail(request, slug):
     return render(request, template,
                   {'product': product,
                    'categories': categories})
+
+
+def articles_list(request):
+    print('jjjjjjjjjjjjjjjjjjjjjjjjjjj')
+    template = 'dshop/product/articles_list.html'
+    categories = Category.objects.all()
+    articles = Article.objects.all()
+    print(articles)
+    return render(request, template,
+                  context={
+                      'articles': articles,
+                      'categories': categories}
+                  )
+

@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Category, Product
+from .models import Category, Product, Article
 
 
 class CategoryAdmin(admin.ModelAdmin):
@@ -18,3 +18,11 @@ class ProductAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Product, ProductAdmin)
+
+
+class ArticleAdmin(admin.ModelAdmin):
+    list_display = ['published_at', 'product', 'title', 'text']
+    list_filter = ['published_at', 'product']
+
+
+admin.site.register(Article, ArticleAdmin)
