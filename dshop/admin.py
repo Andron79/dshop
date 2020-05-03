@@ -21,8 +21,9 @@ admin.site.register(Product, ProductAdmin)
 
 
 class ArticleAdmin(admin.ModelAdmin):
-    list_display = ['published_at', 'product', 'title', 'text']
+    list_display = ['published_at', 'product', 'title']
     list_filter = ['published_at', 'product']
+    prepopulated_fields = {'slug': ('title',)}
 
 
 admin.site.register(Article, ArticleAdmin)

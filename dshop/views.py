@@ -8,11 +8,11 @@ from .models import Product, Category, Article
 def index(request):
     template = 'dshop/index.html'
     categories = Category.objects.all()
-    # articles = Article.objects.all().order_by('published_at')
+    articles = Article.objects.all().order_by('published_at')
 
     return render(request, template,
-                  context={'categories': categories}
-                  )
+                  context={'categories': categories,
+                           'articles': articles})
 
 
 def product_list(request, slug):
@@ -39,14 +39,20 @@ def product_detail(request, slug):
 
 
 def articles_list(request):
-    print('jjjjjjjjjjjjjjjjjjjjjjjjjjj')
-    template = 'dshop/product/articles_list.html'
+    template = 'dshop/articles_list.html'
     categories = Category.objects.all()
     articles = Article.objects.all()
-    print(articles)
     return render(request, template,
                   context={
                       'articles': articles,
-                      'categories': categories}
-                  )
+                      'categories': categories})
 
+
+def articles_detail(request, slug):
+    template = 'dshop/article_detail.html'
+    article = get_object_or_404(Article,
+                                slug=slug)
+    categories = Category.objects.all()
+    return render(request, template,
+                  {'article': article,
+                   'categories': categories})

@@ -13,6 +13,7 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+from django.conf.urls import url
 from django.contrib import admin
 from django.urls import path, include
 from django.conf.urls.static import static
@@ -21,10 +22,12 @@ from dip import settings
 from dshop import views
 
 urlpatterns = [
+    url(r'^ckeditor/', include('ckeditor_uploader.urls')),
     path('admin/', admin.site.urls),
     path('', views.index, name='index'),
     path('dshop/', include('dshop.urls', namespace='dshop')),
-    path('articles_list/', views.articles_list, name='articles_list'),
+    path('articles/', views.articles_list, name='articles_list'),
+    path('articles/<slug>/', views.articles_detail, name='articles_detail_url'),
 ]
 
 if settings.DEBUG:
