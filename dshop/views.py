@@ -20,7 +20,7 @@ def product_list(request, slug):
     categories = Category.objects.all()
     products = Product.objects.filter(available=True)
     category = get_object_or_404(Category, slug=slug)
-    products = products.filter(category=category)
+    products = products.filter(category__in=category.get_descendants(include_self=True))
     return render(request, template,
                   {'category': category,
                    'categories': categories,

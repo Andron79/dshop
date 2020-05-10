@@ -1,16 +1,19 @@
 from django.db import models
 from django.urls import reverse
 from ckeditor_uploader.fields import RichTextUploadingField
+from mptt.models import MPTTModel, TreeForeignKey
 
-
-class Category(models.Model):
+class Category(MPTTModel):
     name = models.CharField(max_length=200, db_index=True, unique=True, verbose_name='Название категории')
-    parent = models.ForeignKey('self', on_delete=models.CASCADE, null=True,
+    parent = TreeForeignKey('self', on_delete=models.CASCADE, null=True,
                                blank=True, related_name='children', verbose_name='Родитель')
     slug = models.SlugField(max_length=200, db_index=True, unique=True)
 
+    class MPTTMeta:
+        order_insertion_by = ['name']
+
     class Meta:
-        ordering = ('name',)
+        # ordering = ('name',)
         verbose_name = 'Категория'
         verbose_name_plural = 'Категории'
 
