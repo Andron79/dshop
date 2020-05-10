@@ -13,7 +13,7 @@
 #### Использовалось в проекте:
 ```bash
   * Frontend - Boptstrap, HTML, jss.
-  * Backend - Django 2.2.10
+  * Backend - Django 2.2.12, django-mptt
   ```  
 #### Документация по проекту.
 
