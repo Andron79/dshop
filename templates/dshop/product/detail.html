@@ -16,12 +16,11 @@
                 <h2><a href="{{ product.category.get_absolute_url }}">{{ product.category }}</a></h2>
                 <p> Цена: {{ product.price }} руб.</p>
                 {% autoescape off %}{{ product.description|linebreaks }}{% endautoescape %}
-                <form method="post" action="./cart/">
-                    <input type="hidden" name="csrfmiddlewaretoken"
-                           value="N4vcBqzjoYkU7OTDuAT8hq8srpvYX44nJsswuP7e3EYg0Hq8DgxuR0eiXWbSr5RZ">
-                    <input type="hidden" name="merchandise_id" value="1">
-                    <input type="submit" class="btn btn-secondary" value="Добавить в корзину »">
-                </form>
+                  <form action="{% url "cart:cart_add" product.id %}" method="post">
+                      {{ cart_product_form }}
+                      {% csrf_token %}
+                      <input type="submit" class="btn btn-secondary" value="Добавить в корзину »">
+                  </form>
             </div>
         </div>
 

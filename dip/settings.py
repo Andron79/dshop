@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'dshop.apps.DshopConfig',
     'mptt',
+    'cart'
 ]
 
 MIDDLEWARE = [
@@ -135,3 +136,6 @@ CKEDITOR_CONFIGS = {
         'toolbar': 'None'
     },
 }
+
+
+CART_SESSION_ID = 'cart'

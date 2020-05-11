@@ -19,12 +19,15 @@ from django.urls import path, include
 from django.conf.urls.static import static
 
 from dip import settings
+from cart import views
 from dshop import views
+# from .import views
 
 urlpatterns = [
     url(r'^ckeditor/', include('ckeditor_uploader.urls')),
     path('admin/', admin.site.urls),
     path('', views.index, name='index'),
+    path('cart/', include('cart.urls', namespace='cart')),
     path('dshop/', include('dshop.urls', namespace='dshop')),
     path('articles/', views.articles_list, name='articles_list'),
     path('articles/<slug>/', views.articles_detail, name='articles_detail_url'),

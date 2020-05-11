@@ -1,8 +1,6 @@
 from django.shortcuts import render, get_object_or_404
 from .models import Product, Category, Article
-
-
-# from django.views.generic import ListView
+from cart.forms import CartAddProductForm
 
 
 def index(request):
@@ -33,9 +31,11 @@ def product_detail(request, slug):
                                 slug=slug,
                                 available=True)
     categories = Category.objects.all()
+    cart_product_form = CartAddProductForm()
     return render(request, template,
                   {'product': product,
-                   'categories': categories})
+                   'categories': categories,
+                   'cart_product_form': cart_product_form})
 
 
 def articles_list(request):
@@ -56,3 +56,5 @@ def articles_detail(request, slug):
     return render(request, template,
                   {'article': article,
                    'categories': categories})
+
+
