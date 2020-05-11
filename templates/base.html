@@ -34,20 +34,20 @@
                     Каталог товаров</a>
                 <div class="dropdown-menu" aria-labelledby="dropdown01">
                     <ul>
-                    {% recursetree categories %}
-                    <li>
-                        <a class="dropdown-item" href="{{ node.get_absolute_url }}">{{ node.name }}</a>
-                        <ul>
-                            {{ children }}
-                        </ul>
-                    </li>
-                    {% endrecursetree %}
+                        {% recursetree categories %}
+                            <li>
+                                <a class="dropdown-item" href="{{ node.get_absolute_url }}">{{ node.name }}</a>
+                                <ul>
+                                    {{ children }}
+                                </ul>
+                            </li>
+                        {% endrecursetree %}
                     </ul>
                 </div>
 
         </ul>
         <a class="btn btn-outline-success my-2 my-sm-0" role="button"
-           href="{% static cart.html %}">
+           href="{% url "cart:cart_detail" %}">
             Корзина</a>
 
 
@@ -55,11 +55,27 @@
            href="{% static login.html %}">
             Войти</a>
 
+
+{#    Доделать, не работает контекстный процессор #}
+{#        <div class="cart">#}
+{#            {% with total_items=cart|length %}#}
+{#                {% if cart|length > 0 %}#}
+{#                    Ваша корзина:#}
+{#                    <a href="{% url "cart:cart_detail" %}">#}
+{#                        {{ total_items }} item{{ total_items|pluralize }},#}
+{#                        {{ cart.get_total_price }} руб.#}
+{#                    </a>#}
+{#                {% else %}#}
+{#                    Корзина пуста#}
+{#                {% endif %}#}
+{#            {% endwith %}#}
+{#        </div>#}
+
     </div>
 </nav>
 
 {% block content %}
-    
+
 {% endblock %}
 
 <hr>

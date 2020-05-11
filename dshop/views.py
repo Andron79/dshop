@@ -13,7 +13,7 @@ def index(request):
                            'articles': articles})
 
 
-def product_list(request, slug):
+def product_list(request, slug='root'):
     template = 'dshop/product/list.html'
     categories = Category.objects.all()
     products = Product.objects.filter(available=True)
@@ -56,5 +56,3 @@ def articles_detail(request, slug):
     return render(request, template,
                   {'article': article,
                    'categories': categories})
-
-
