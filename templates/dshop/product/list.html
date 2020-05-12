@@ -22,15 +22,16 @@
                         <a href="{{ product.get_absolute_url }}">
                             <img src="{{ product.image.url }}" height="250"></a>
                         <p> Цена: {{ product.price }} руб.</p>
-                        <form>
-                            <input type="submit" class="btn btn-secondary" value="Подробнее »">
-                        </form>
+{#                        <form>#}
+{#                            <input type="submit" class="btn btn-secondary" value="Подробнее">#}
+{##}
+{#                        </form>#}
                     </div>
                 {% endfor %}
             </div>
         </div>
         <div class="alert alert-dark" role="alert">
-            Просто здесь так написано!
+            Выбираейте с удовольствием!
         </div>
     </div> <!-- /container -->
 

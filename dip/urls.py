@@ -28,6 +28,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.index, name='index'),
     path('cart/', include('cart.urls', namespace='cart')),
+    path('orders/', include('orders.urls', namespace='orders')),
     path('dshop/', include('dshop.urls', namespace='dshop')),
     path('articles/', views.articles_list, name='articles_list'),
     path('articles/<slug>/', views.articles_detail, name='articles_detail_url'),

@@ -1,0 +1,40 @@
+{% extends "dshop/base_dshop.html" %}
+{% load static %}
+{% block title %}
+    Оформление заказа
+{% endblock %}
+
+{% block content %}
+    <div class="jumbotron">
+        <div class="container">
+            <h4 class="display-4">Оформление заказа:</h4>
+        </div>
+    </div>
+    <div class="container mt-3">
+        <table class="table">
+            <thead class="thead-dark">
+            <tr>
+                <th scope="col">Количество</th>
+                <th scope="col">Товар</th>
+                <th scope="col">Цена</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for item in cart %}
+                <tr>
+                    <td>{{ item.quantity }} шт.</td>
+                    <td>{{ item.product.name }}</td>
+                    <td>{{ item.total_price }} руб.</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        <h6> Итого: {{ cart.get_total_price }} руб.</h6>
+        <form action="." method="post" class="order-form">
+                        {{ form.as_p }}
+                        <p><input type="submit" value="Подтвердить заказ"></p>
+
+            {% csrf_token %}
+        </form>
+    </div> <!-- /container -->
+{% endblock %}

@@ -39,7 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'dshop.apps.DshopConfig',
     'mptt',
-    'cart'
+    'cart',
+    'orders'
 ]
 
 MIDDLEWARE = [
@@ -140,3 +141,5 @@ CKEDITOR_CONFIGS = {
 
 
 CART_SESSION_ID = 'cart'
+
+USE_THOUSAND_SEPARATOR = True
