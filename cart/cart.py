@@ -5,7 +5,7 @@ from dshop.models import Product
 
 class Cart(object):
 
-    def __init__(self, request):
+    def __init__(self, request):  # TODO
         """
         Инициализация корзины
         """

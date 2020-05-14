@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views.decorators.http import require_POST
-from dshop.models import Product, Category
+from dshop.models import Product
 from .cart import Cart
 from .forms import CartAddProductForm
 
@@ -27,6 +27,4 @@ def cart_remove(request, product_id):
 
 def cart_detail(request):
     cart = Cart(request)
-    categories = Category.objects.all()
-    return render(request, 'cart/detail.html', {'cart': cart,
-                                                'categories': categories})
+    return render(request, 'cart/detail.html', {'cart': cart})
