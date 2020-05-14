@@ -40,7 +40,9 @@ INSTALLED_APPS = [
     'dshop.apps.DshopConfig',
     'mptt',
     'cart',
-    'orders'
+    'orders',
+    'accounts',
+    'crispy_forms'
 ]
 
 MIDDLEWARE = [
@@ -139,7 +141,9 @@ CKEDITOR_CONFIGS = {
     },
 }
 
-
 CART_SESSION_ID = 'cart'
 
 USE_THOUSAND_SEPARATOR = True
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
+LOGIN_REDIRECT_URL =  '/'

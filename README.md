@@ -39,8 +39,11 @@ python manage.py runserver
 python manage.py makemigrations
 python manage.py migrate
 ```
-
-Доступ в админку:
+* Дамп данных с тестовым наполнением и тестовым суперпользователем:
+```bash
+fixtures.json
+```
+* Доступ в админку:
 ```bash 
 admin, admin
 ```
