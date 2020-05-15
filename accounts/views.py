@@ -1,19 +1,17 @@
-from django.contrib.auth import authenticate, login
-from django.shortcuts import render, redirect
 from .forms import SignUpEmailForm
+from django.views.generic.edit import FormView
 
 
-# def signup(request):
-#     template = 'accounts/signup.html'
-#     if request.method == 'POST':
-#         form = SignUpEmailForm(request.POST)
-#         if form.is_valid():
-#             form.save()
-#         username = form.cleaned_data.get('username')
-#         my_password = form.cleaned_data.get('password1')
-#         user = authenticate(username=username, password=my_password)
-#         login(request, user)
-#         return redirect('dshop:index')
-#     else:
-#         form = SignUpEmailForm()
-#         return render(request, template, {'form': form})
+class EmailRegisterFormView(FormView):
+    form_class = SignUpEmailForm
+    success_url = "/"
+    template_name = "registration/register.html"
+
+    def form_valid(self, form):
+        form.save()
+        return super(EmailRegisterFormView, self).form_valid(form)
+
+    def form_invalid(self, form):
+        return super(EmailRegisterFormView, self).form_invalid(form)
+
+

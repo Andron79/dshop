@@ -3,6 +3,7 @@ from .models import Category, Product, Article
 from mptt.admin import MPTTModelAdmin
 
 
+
 class CategoryAdmin(MPTTModelAdmin):
     list_display = ['name', 'slug']
     prepopulated_fields = {'slug': ('name',)}
@@ -29,3 +30,5 @@ class ArticleAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Article, ArticleAdmin)
+
+
