@@ -42,7 +42,7 @@ python manage.py migrate
 ```
 * Дамп данных с тестовым наполнением и тестовым суперпользователем:
 ```bash
-fixtures.json
+fix tures.json
 ```
 * Доступ в админку:
 ```bash 

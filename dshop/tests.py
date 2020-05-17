@@ -1,5 +1,4 @@
 from django.test import TestCase
-
 from dshop.models import Product, Category
 
 
@@ -23,13 +22,16 @@ class ProductModelTest(TestCase):
 
     @classmethod
     def setUpTestData(cls):
-
         Product.objects.create(
-            category='smartfony',
+            category=Category.objects.create(
+                name='smartfony',
+                # parent='',
+                slug='smartfony'
+            ),
             name='LG',
-            #slug='lg',
+            slug='lg',
             # image = models.ImageField(upload_to='products/%Y/%m/%d', blank=True, verbose_name='Изображение')
-            description='hhhh',
+            description='Описание',
             price=100,
             stock=10,
             available=True,
@@ -39,4 +41,4 @@ class ProductModelTest(TestCase):
     def test_get_absolute_url(self):
         product = Product.objects.get(id=1)
         # Тест на соответсвие ожидаемой ссылки
-        self.assertEquals(product.get_absolute_url(), 'dshop/product/lg')
+        self.assertEquals(product.get_absolute_url(), '/dshop/product/lg/')
