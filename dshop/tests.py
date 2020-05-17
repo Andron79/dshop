@@ -2,6 +2,7 @@ from django.test import TestCase
 from dshop.models import Product, Category
 
 
+# Test Models
 class CategoryModelTest(TestCase):
 
     @classmethod
@@ -42,3 +43,4 @@ class ProductModelTest(TestCase):
         product = Product.objects.get(id=1)
         # Тест на соответсвие ожидаемой ссылки
         self.assertEquals(product.get_absolute_url(), '/dshop/product/lg/')
+

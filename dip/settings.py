@@ -24,7 +24,7 @@ SECRET_KEY = '5b2%^t56sqw3tt6*c+t%#2m@+o(^2$d6^-($+2@vp(ood_u6bg'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['127.0.0.1', 'testserver',]
 
 # Application definition
 
@@ -104,7 +104,6 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
-
 
 AUTHENTICATION_BACKENDS = [
     'accounts.auth_backends.UserEmailBackend',
