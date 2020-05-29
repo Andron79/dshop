@@ -1,9 +1,12 @@
-from django.contrib.auth.models import User
+from django.conf import settings
 from django.db import models
+
 from dshop.models import Product
 
 
 class Order(models.Model):
+    username = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=True, blank=True,
+                                    verbose_name='Зарегистрированный пользователь')
     first_name = models.CharField(max_length=50, verbose_name='Имя')
     last_name = models.CharField(max_length=50, verbose_name='Фамилия')
     email = models.EmailField()
@@ -17,7 +20,7 @@ class Order(models.Model):
     class Meta:
         ordering = ('-created',)
         verbose_name = 'Заказ'
-        verbose_name_plural = 'Заказы'
+        verbose_name_plural = 'Заказы(ов)'
 
     def __str__(self):
         return 'Order {}'.format(self.id)
