@@ -29,7 +29,8 @@
             {% endfor %}
             </tbody>
         </table>
-        <h6> Итого: {{ cart.get_total_price }} руб.</h6>
+        <h6> Итого: {{ cart.get_total_price }} руб.
+
         <form action="." method="post" class="order-form">
                         {{ form.as_p }}
                         <p><input type="submit" value="Подтвердить заказ"></p>

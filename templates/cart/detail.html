@@ -45,13 +45,15 @@
             </tr>
             </tbody>
         </table>
-        <p class="text-center" p>
+        <p class="text-center" >
             <a href="{% url "dshop:product_list" %}"
             <button type="button" class="btn btn-secondary btn-lg">Продолжить покупки</button>
             </a>
-            <a href="{% url "orders:order_create" %}"
-            <button type="button" class="btn btn-primary btn-lg">Перейти к оформлению</button>
-            </a>
+            {% if cart.get_total_price != 0 %}
+                <a href="{% url "orders:order_create" %}"
+                <button type="button" class="btn btn-primary btn-lg">Перейти к оформлению</button>
+                </a>
+            {% endif %}
         </p>
     </div> <!-- /container -->
 {% endblock %}
