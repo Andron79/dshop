@@ -1,24 +1,52 @@
+from dataclasses import dataclass
+
+from django.conf import settings
 from django.test import TestCase
+
 from cart.cart import Cart
-from dshop.models import Product, Category
+from dshop.models import Category, Product
+
+
+@dataclass
+class MockedSession(dict):
+    modified = False
+
+
+@dataclass
+class MockedRequest:
+    session = MockedSession()
 
 
 class CartTest(TestCase):
-
-    @classmethod
-    def setUpClass(cls):
-        super(CartTest, cls).setUpClass()
-        cls.category = Category(name='smartphones', slug='smart')
-        cls.category.save()
-        cls.test_product1 = Product(category=cls.category, name='Xperia', stock=12, price=1000)
-        cls.test_product1.save()
-
-
-class CartTestAdd(CartTest):  # Завис здесь, не могу понять как протестировать добавление в корзину
+    def setUp(self):
+        self.category = Category(name="smartphones", slug="smart")
+        self.category.save()
+        self.test_product1 = Product(
+            category=self.category, name="Xperia", stock=12, price=1000
+        )
+        self.test_product2 = Product(
+            category=self.category, name="Iphone", stock=12, price=50000
+        )
+        self.test_product1.save()
+        self.test_product2.save()
+        self.cart = Cart(MockedRequest())
 
     def test_add(self):
-        # Тест на соответсвие ожидаемого количества
-        cart = Cart()
-        result = cart.add(self.test_product1, quantity=1, update_quantity=False)
-        self.assertEquals(result, 1)
-        # self.assertEqual(self.test_product1.name, 'Xperia') #Этот тест проходит
+        self.cart.add(self.test_product1, 1, update_quantity=True)
+        self.assertEquals(len(self.cart.cart), 1)
+        self.assertTrue(str(self.test_product1.id) in self.cart.cart)
+        product = self.cart.cart[str(self.test_product1.id)]
+        self.assertEquals(product["quantity"], 1)
+        self.assertEquals(product["price"], str(self.test_product1.price))
+
+    def test_update(self):
+        self.cart.add(self.test_product1, 1, update_quantity=True)
+        self.assertTrue(str(self.test_product1.id) in self.cart.cart)
+        self.cart.add(self.test_product1, 1)
+        product = self.cart.cart[str(self.test_product1.id)]
+        self.assertEquals(product["quantity"], 2)
+
+    def test_save(self):
+        self.cart.save()
+        self.assertTrue(self.cart.session.modified)
+        self.assertTrue(settings.CART_SESSION_ID in self.cart.session)
