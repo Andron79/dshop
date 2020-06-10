@@ -31,7 +31,13 @@ def order_create(request):
                            'form.first_name': order.first_name,
                            'form.last_name': order.last_name})
     else:
-        form = OrderCreateForm
+        user = request.user
+        data = {}
+        if user.is_authenticated:
+            data["last_name"] = user.last_name
+            data["first_name"] = user.first_name
+            data["email"] = user.email
+        form = OrderCreateForm(initial=data)
     return render(request, 'orders/create.html',
                   {'cart': cart,
                    'form': form})
