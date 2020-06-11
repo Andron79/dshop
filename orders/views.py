@@ -9,8 +9,8 @@ from django.contrib.auth.models import User
 def order_create(request):
     cart = Cart(request)
     if request.method == 'POST':
-        # user = request.user
-        form = OrderCreateForm(request.POST)
+        user = request.user
+        form = OrderCreateForm(request.POST, initial=user) #, initial=user
         if form.is_valid():
             order = form.save(commit=False)
             if request.user.is_authenticated:
@@ -25,11 +25,11 @@ def order_create(request):
                                          quantity=item['quantity'])
             # очистка корзины
             cart.clear()
-            print(request.user.last_name)
+            #print(request.user.last_name)
             return render(request, 'orders/created.html',
-                          {'order': order,
-                           'form.first_name': order.first_name,
-                           'form.last_name': order.last_name})
+                          {'order': order})
+    #                        'form.first_name': order.first_name,
+    #                        'form.last_name': order.last_name})
     else:
         user = request.user
         data = {}
