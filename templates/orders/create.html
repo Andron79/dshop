@@ -1,5 +1,6 @@
 {% extends "dshop/base_dshop.html" %}
 {% load static %}
+
 {% block title %}
     Оформление заказа
 {% endblock %}
@@ -32,6 +33,7 @@
         <h6> Итого: {{ cart.get_total_price }} руб.
 
             <form action="." method="post" class="order-form">
+
                 {{ form.as_p }}
 
                 <p><input type="submit" value="Подтвердить заказ"></p>
