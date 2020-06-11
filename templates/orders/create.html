@@ -32,22 +32,7 @@
         <h6> Итого: {{ cart.get_total_price }} руб.
 
             <form action="." method="post" class="order-form">
-                {% if request.user.is_authenticated %}
-                    <p>{{ form.first_name.label_tag }} {{ request.user.first_name }}</p>
-                    <p>{{ form.last_name.label_tag }} {{ request.user.last_name }}</p>
-                    {{ form.email.errors }}
-                    <p>{{ form.email.label_tag }} {{ form.email }}</p>
-                    {{ form.address.errors }}
-                    <p>{{ form.address.label_tag }} {{ form.address }}</p>
-                    {{ form.phone.errors }}
-                    <p>{{ form.phone.label_tag }} {{ form.phone }}</p>
-                    <p>{{ form.city.label_tag }} {{ form.city }}</p>
-                    {{ form.first_name.as_hidden }}
-                    {{ form.last_name.as_hidden }}
-
-                {% else %}
-                    {{ form.as_p }}
-                {% endif %}
+                {{ form.as_p }}
 
                 <p><input type="submit" value="Подтвердить заказ"></p>
                 {% csrf_token %}
