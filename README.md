@@ -11,8 +11,8 @@
   
 #### Использовалось в проекте:
 ```bash
-  * Frontend - Boptstrap 4, HTML, jss.
-  * Backend - Django 2.2.12, django-mptt
+  * Frontend - Boptstrap 4
+  * Backend - Django 2.2.12
   ```  
 #### Документация по проекту.
 
