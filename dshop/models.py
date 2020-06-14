@@ -14,7 +14,6 @@ class Category(MPTTModel):
         order_insertion_by = ['name']
 
     class Meta:
-        # ordering = ('name',)
         verbose_name = 'Категория'
         verbose_name_plural = 'Категории'
 
