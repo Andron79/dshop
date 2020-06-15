@@ -11,7 +11,7 @@
   
 #### Использовалось в проекте:
 ```bash
-  * Frontend - Boptstrap 4
+  * Frontend - Bootstrap 4
   * Backend - Django 2.2.12
   ```  
 #### Документация по проекту.
