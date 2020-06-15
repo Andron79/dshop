@@ -12,7 +12,7 @@
 #### Использовалось в проекте:
 ```bash
   * Frontend - Bootstrap 4
-  * Backend - Django 2.2.12
+  * Backend - Django 2.2.13
   ```  
 #### Документация по проекту.
 
