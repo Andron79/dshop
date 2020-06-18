@@ -19,12 +19,16 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '5b2%^t56sqw3tt6*c+t%#2m@+o(^2$d6^-($+2@vp(ood_u6bg'
+# SECRET_KEY = '5b2%^t56sqw3tt6*c+t%#2m@+o(^2$d6^-($+2@vp(ood_u6bg'
+
+SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', '5b2%^t56sqw3tt6*c+t%#2m@+o(^2$d6^-($+2@vp(ood_u6bg')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+# DEBUG = True
+DEBUG = bool( os.environ.get('DJANGO_DEBUG', True))
 
-ALLOWED_HOSTS = ['127.0.0.1', 'testserver', ]
+ALLOWED_HOSTS = ['127.0.0.1', 'testserver', 'andron79.pythonanywear.com', 'Andron79.pythonanywear.com']
+
 
 # Application definition
 
@@ -129,10 +133,6 @@ STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
-    os.path.join(BASE_DIR, 'static/css'),
-    os.path.join(BASE_DIR, 'static/js'),
-    os.path.join(BASE_DIR, 'static/img'),
-    os.path.join(BASE_DIR, 'static/ico'),
 ]
 
 MEDIA_URL = '/media/'
