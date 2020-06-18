@@ -40,14 +40,11 @@ python manage.py runserver
 python manage.py makemigrations
 python manage.py migrate
 ```
-* Дамп данных с тестовым наполнением и тестовым суперпользователем:
+* Дамп данных с тестовым наполнением:
 ```bash
 fix tures.json
 ```
-* Доступ в админку:
-```bash 
-admin, admin
-```
+
 
 ## Ищу работу Python/Django разработчика.
 * Мое резюме:
