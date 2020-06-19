@@ -42,7 +42,7 @@ python manage.py migrate
 ```
 * Дамп данных с тестовым наполнением:
 ```bash
-fix tures.json
+fixtures.json
 ```
 
 
