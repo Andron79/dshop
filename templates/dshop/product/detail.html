@@ -19,7 +19,7 @@
                 {% autoescape off %}{{ product.description|linebreaks }}{% endautoescape %}
                 <form action="{% url "cart:cart_add" product.id %}" method="post">
                     <div class="col-1">
-                        {{ cart_product_form.quantity|as_crispy_field }}
+                        {{ form.quantity|as_crispy_field}}
                         <input type="submit" class="btn btn-primary" value="Добавить в корзину">
                         {% csrf_token %}
                     </div>
