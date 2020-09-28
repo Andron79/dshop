@@ -60,8 +60,6 @@ class CartTest(TestCase):
         self.assertEquals(product["quantity"], 1)
         self.assertEquals(product["price"], str(self.test_product2.price))
 
-    # работа итератора __iter__ я так понимаю провериться в тесте def test_get_total_price(self):
-
     def test_get_total_price(self):
         self.cart.add(self.test_product1, 1, update_quantity=True)
         self.cart.add(self.test_product2, 1, update_quantity=True)

@@ -1,6 +1,6 @@
 from django.urls import path
 from dshop import views
-from dshop.views import ProductDetail #, CategoryView
+from dshop.views import ProductDetail # CategoryView
 
 app_name = 'dshop'
 

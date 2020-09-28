@@ -15,8 +15,10 @@ class IndexView(ListView):
 #     model = Category
 #     slug_field = 'pk'
 #     products = Product.objects.filter(available=True)
-#     category = get_object_or_404(Category, slug=slug_field)
+#     #category = get_object_or_404(Category, slug=slug_field)
+#     category = Category.objects.all()
 #     template_name = 'dshop/product/list.html'
+#     queryset = Product.objects.filter(available=True).filter(category__in=category.get_descendants(include_self=True))
 #
 #     def get_queryset(self):
 #         query_set = self.model.objects.filter(category=self.kwargs.get('category'))
@@ -28,6 +30,12 @@ class IndexView(ListView):
 #     #     return queryset.get(slug=slug)
 #     # category = get_object_or_404(Category, slug=slug)
 #     # queryset = Product.objects.filter(available=True) #.filter(category__in=category.get_descendants(include_self=True))
+
+
+# class ProductView(ListView):
+#     model = Category
+#     template_name = 'dshop/product/list.html'
+#     category = Category.objects.get()
 
 
 def product_list(request, slug='root'):

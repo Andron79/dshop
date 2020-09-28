@@ -46,7 +46,8 @@ INSTALLED_APPS = [
     'cart',
     'orders',
     'accounts',
-    'crispy_forms'
+    'crispy_forms',
+    'robokassa'
 ]
 
 MIDDLEWARE = [
@@ -161,4 +162,11 @@ LOGIN_REDIRECT_URL = '/'
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
+# Robokassa settings
 
+ROBOKASSA_LOGIN = "your_login"
+ROBOKASSA_PWD1 = "password1"
+ROBOKASSA_PWD2 = "password2"
+ROBOKASSA_ORDER_MODEL = "yoursite.models.OrderModel"
+ROBOKASSA_SUCCESS_TEMPLATE = "payment_success.html"
+ROBOKASSA_FAIL_TEMPLATE = "payment_fail.html"
