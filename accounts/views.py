@@ -5,8 +5,8 @@ from django.views.generic.edit import FormView
 
 class EmailRegisterFormView(FormView):
     form_class = SignUpEmailForm
-    success_url = "/"
-    template_name = "registration/register.html"
+    success_url = '/'
+    template_name = 'registration/register.html'
 
     def form_valid(self, form):
         form.save()

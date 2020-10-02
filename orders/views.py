@@ -1,17 +1,21 @@
+from django.http import HttpResponseRedirect
 from django.shortcuts import render
-from .models import OrderItem
+from django.urls import reverse_lazy
+from django.views.generic import FormView, CreateView, TemplateView
+from .models import OrderItem, Order
 from .forms import OrderCreateForm
 from cart.cart import Cart
 
 
-def order_create(request):
-    cart = Cart(request)
-    if request.method == 'POST':
-        user = request.user
-        if user.is_authenticated:
-            data = {"last_name": user.last_name, "first_name": user.first_name, "email": user.email}
-            form = OrderCreateForm(request.POST, initial=data)
-        form = OrderCreateForm(request.POST)
+class OrderCreate(FormView, CreateView):
+    form_class = OrderCreateForm
+    model = Order
+    template_name = 'orders/create.html'
+    success_url = reverse_lazy('orders:created')
+
+    def post(self, request, *args, **kwargs):
+        cart = Cart(request)
+        form = self.form_class(request.POST)
         if form.is_valid():
             order = form.save(commit=False)
             if request.user.is_authenticated:
@@ -22,17 +26,26 @@ def order_create(request):
                                          product=item['product'],
                                          price=item['price'],
                                          quantity=item['quantity'])
-            # очистка корзины
             cart.clear()
-            return render(request, 'orders/created.html', {'order': order})
-    else:
+        return HttpResponseRedirect(self.success_url)
+
+    def get(self, request, *args, **kwargs):
+        cart = Cart(request)
         user = request.user
         data = {}
         if user.is_authenticated:
             data["last_name"] = user.last_name
             data["first_name"] = user.first_name
             data["email"] = user.email
-        form = OrderCreateForm(initial=data)
-    return render(request, 'orders/create.html',
-                  {'cart': cart,
-                   'form': form})
+        form = self.form_class(initial=data)
+        return render(request, 'orders/create.html',
+                      {'cart': cart,
+                       'form': form})
+
+
+class OrderCreated(TemplateView):
+    template_name = 'orders/created.html'
+    model = Order
+    extra_context = {'order': Order.objects.first().id}
+
+

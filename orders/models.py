@@ -1,12 +1,11 @@
 from django.conf import settings
 from django.db import models
-
 from dshop.models import Product
 
 
 class Order(models.Model):
     username = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=True, blank=True,
-                                    verbose_name='Зарегистрированный пользователь') #поменял на ForeignKey и сломались тесты
+                                 verbose_name='Зарегистрированный пользователь')
     first_name = models.CharField(max_length=50, verbose_name='Имя')
     last_name = models.CharField(max_length=50, verbose_name='Фамилия')
     email = models.EmailField()

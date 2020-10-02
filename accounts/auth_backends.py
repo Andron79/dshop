@@ -8,7 +8,6 @@ class UserEmailBackend(ModelBackend):
             kwargs = {'email': username}
         else:
             kwargs = {'username': username}
-
         try:
             user = User.objects.get(**kwargs)
             if user.check_password(password):

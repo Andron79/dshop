@@ -18,6 +18,7 @@ urlpatterns = [
     path('cart/', include('cart.urls', namespace='cart')),
     path('orders/', include('orders.urls', namespace='orders')),
     path('dshop/', include('dshop.urls', namespace='dshop')),
+    path('payment/', include('robokassa.urls', namespace='robokassa')),
     path('articles/', ArticleView.as_view(), name='articles_list'),
     path('articles/<slug>/', ArticleDetail.as_view(), name='articles_detail_url'),
 ]

@@ -13,13 +13,16 @@
                     </div>
                     <div class="card-body">
                         <h5 class="card-title">Ваш заказ успешно оформлен!</h5>
-                        <p class="card-text">Номер Вашего заказа <strong>{{ order.id }}</strong>.</p>
+                        <p class="card-text">Номер Вашего заказа <strong>{{ order }}</strong>.</p>
                         <a href="{% url "dshop:product_list" %}" class="btn btn-primary">Смотреть еще товары</a>
+                        <p class="card-title">Или оплатить онлайн!</p>
+                        <form name="form" method="POST" action="{% url 'robokassa:payment_url' %}">
+                            {% csrf_token %}
+                            <input class="btn btn-primary" type="submit" name="submit"
+                                   value="Оплатить онлайн РОБОКАССА"/>
+                        </form>
                     </div>
                     <div class="card-footer text-muted">
-{#                        Спасибо за покупку в нашем магазине! Ждем Вас снова!#}
-
-                        <script type="text/javascript" src="https://auth.robokassa.ru/Merchant/PaymentForm/FormSS.js?MerchantLogin=dshop.ru&InvoiceID=0&Culture=ru&Encoding=utf-8&OutSum=0,00&SignatureValue=1b05e3d1402522308c4b076b671a2997"></script>
                     </div>
                 </div>
             </div>

@@ -10,32 +10,14 @@ class IndexView(ListView):
     context_object_name = 'articles'
 
 
-# class CategoryView(ListView):
-#
-#     model = Category
-#     slug_field = 'pk'
-#     products = Product.objects.filter(available=True)
-#     #category = get_object_or_404(Category, slug=slug_field)
-#     category = Category.objects.all()
-#     template_name = 'dshop/product/list.html'
-#     queryset = Product.objects.filter(available=True).filter(category__in=category.get_descendants(include_self=True))
-#
-#     def get_queryset(self):
-#         query_set = self.model.objects.filter(category=self.kwargs.get('category'))
-#         return query_set
-#     # queryset = Product.objects.filter(available=True).filter(category__in=category.get_descendants(include_self=True))
-#     context_object_name = 'products'
-#     # def get_object(self, queryset=queryset):
-#     #     slug = self.kwargs.get(self.slug_url_kwarg, None)
-#     #     return queryset.get(slug=slug)
-#     # category = get_object_or_404(Category, slug=slug)
-#     # queryset = Product.objects.filter(available=True) #.filter(category__in=category.get_descendants(include_self=True))
-
-
-# class ProductView(ListView):
-#     model = Category
-#     template_name = 'dshop/product/list.html'
-#     category = Category.objects.get()
+class ProductListView(ListView):
+    model = Category
+    template_name = 'dshop/product/list.html'
+    slug_field = 'root'
+    products = Product.objects.filter(available=True)
+    category = get_object_or_404(Category, slug=slug_field)
+    products = products.filter(category__in=category.get_descendants(include_self=True))
+    context_object_name = products
 
 
 def product_list(request, slug='root'):

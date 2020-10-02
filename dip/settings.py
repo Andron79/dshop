@@ -65,8 +65,7 @@ ROOT_URLCONF = 'dip.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'templates')]
-        ,
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -164,9 +163,12 @@ EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 # Robokassa settings
 
-ROBOKASSA_LOGIN = "your_login"
-ROBOKASSA_PWD1 = "password1"
-ROBOKASSA_PWD2 = "password2"
+ROBOKASSA_TEST_PAY = True    # True - test mode pay, False - Commercial mode pay
+ROBOKASSA_URL = "https://auth.robokassa.ru/Merchant/Index.aspx?"
+ROBOKASSA_LOGIN = "dshop.ru"
+ROBOKASSA_PASSWORD1 = "Br281N6MwvYR7SOaVnWc"
+ROBOKASSA_PASSWORD2 = "rm9TDtYJ24T6iTpqX9eB"
 ROBOKASSA_ORDER_MODEL = "yoursite.models.OrderModel"
 ROBOKASSA_SUCCESS_TEMPLATE = "payment_success.html"
 ROBOKASSA_FAIL_TEMPLATE = "payment_fail.html"
+# ROBOKASSA_SESSION_ID = 'robo'
